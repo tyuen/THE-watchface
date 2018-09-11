@@ -1,0 +1,34 @@
+line {
+  stroke-linecap: round;
+}
+#mydate {
+  font-size: 24;
+  font-family: System-Regular;
+  text-anchor: middle;
+  text-length: 2;
+  x: 73%;
+}
+
+#myweek {
+  font-size: 24;
+  font-family: System-Regular;
+  text-anchor: middle;
+  text-length: 3;
+  x: 31%;
+}
+
+#mystats {
+  font-size: 28;
+  font-family: System-Bold;
+  text-anchor: middle;
+  text-length: 12;
+}
+#batt_bars {
+  transform: translate(31%,0);
+}
+#batt0 {
+  stroke-linecap: butt;
+}
+#batt {
+  stroke-linecap: butt;
+}
