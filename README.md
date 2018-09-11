@@ -1,5 +1,7 @@
 # THE watchface for Fitbit Ionic/Versa
 
+![screenshot](TH3-screenshot.png)
+
 Features:
 - Customize the color of the minute hand and rings
 - Tap to cycle between the numerical stats
