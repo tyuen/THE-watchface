@@ -8,8 +8,9 @@ import {peerSocket} from "messaging";
 import {units} from "user-settings";
 import * as fs from "fs";
 import {battery} from "power";
+import {decode} from "cbor";
+import {inbox} from "file-transfer";
 
-const WEEKS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const THEMES = {
   red:    ["F93535", "CC4848", "AB4545"],
   orange: ["FF970F", "DD7F23", "B3671D"],
@@ -21,6 +22,7 @@ const THEMES = {
   grey: ["888888", "666666", "444444"],
   white: ["FFFFFF", "FFFFFF", "FFFFFF"]
 };
+let weekNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 var lastUpdatedRings = 0;
 var lastUpdatedHeart = 0;
@@ -45,7 +47,7 @@ function $(s) {
 function onTick() {
   let now = new Date();
   myDate.text = now.getDate();
-  myWeek.text = WEEKS[now.getDay()];
+  myWeek.text = weekNames[now.getDay()];
 
   let hours = now.getHours() % 12;
   let mins = now.getMinutes();
@@ -89,7 +91,17 @@ clock.ontick = onTick;
 
 onTick();
 
-$("main").onclick = () => {
+$("top_half").onclick = () => {
+  if(display.autoOff === true) {
+    display.autoOff = false;
+    $("bklight").style.display = "inline";
+  } else {
+    display.autoOff = true;
+    $("bklight").style.display = "none";
+  }
+};
+
+$("btm_half").onclick = () => {
   curStat = (curStat + 1) % 7;
   if(curStat === 1) {
     updateHeart();
@@ -165,16 +177,6 @@ function updateHeart() {
   }
 }
 
-peerSocket.onmessage = e => {
-  e = e.data;
-  if(e) {
-    applySettings(e);
-    display.poke();
-    vibration.start("bump");
-    fs.writeFileSync("settings.txt", e, "json");
-  }
-};
-
 function applySettings(o) {
   if(o.theme) {
     let colors = THEMES[o.theme] || [];
@@ -200,13 +202,38 @@ function applySettings(o) {
   lastUpdatedHeart = 0;
 }
 
-function getSettings() {
-  let f;
-  try { f = fs.readFileSync("settings.txt", "json"); } catch(e) {}
-  if(f) {
-    applySettings(f);
-  } else {
-    peerSocket.onopen = () => { peerSocket.send({getAll: 1}) };
+peerSocket.onmessage = e => {
+  e = e.data;
+  if(e) {
+    applySettings(e);
+    display.poke();
+    vibration.start("bump");
+    fs.writeFileSync("settings2.txt", e, "cbor");
+  }
+};
+
+function parseFile(name) {
+  let obj;
+  try {
+    obj = fs.readFileSync(name, "cbor");
+  } catch(e) {}
+  if(name === "settings2.txt") {
+    if(obj) {
+      applySettings(obj);
+    } else {
+      peerSocket.onopen = () => {peerSocket.send({getAll: 1})};
+    }
+  } else if(name === "days.txt") {
+    if(obj) weekNames = obj.days;
   }
 }
-getSettings();
+
+function pendingFiles() {
+  let temp;
+  while(temp = inbox.nextFile()) parseFile(temp);
+}
+
+pendingFiles();
+inbox.onnewfile = pendingFiles;
+parseFile("settings2.txt");
+parseFile("days.txt");
