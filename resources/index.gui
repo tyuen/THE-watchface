@@ -113,9 +113,11 @@
   </g>
 
   <g id="batt_bars">
-    <line id="batt0" x1="-14" x2="14" y1="50%+18" y2="50%+18" stroke-width="2" fill="#333333" />
-    <line id="batt" x1="-14" x2="14" y1="50%+18" y2="50%+18" stroke-width="2" fill="#5682b4" class="color2" />
+    <line id="batt0" x1="-14" x2="14" stroke-width="2" fill="#333333" />
+    <line id="batt" x1="-14" x2="14" stroke-width="2" fill="#5682b4" class="color2" />
   </g>
+
+  <image id="bklight" class="color2" x="50%-15" y="20%-15" width="31" height="31" href="bklight.png" fill="#5682b4" display="none" />
 
   <g id="minutes" transform="translate(50%,50%)" fill="#6fa8e9" class="color1">
     <use href="#min_hand" fill="inherit" />
@@ -129,9 +131,9 @@
     <line x1="0" y1="8%" x2="0" y2="-50%+3" stroke-width="1" class="color1" fill="#6fa8e9" />
   </g>
 
-  <text id="mydate" y="50%+8" fill="white"></text>
-  <text id="myweek" y="50%+8" fill="#dddddd"></text>
-  <text id="mystats" x="50%" y="76%+8" fill="#5682b4" class="color2"></text>
+  <text id="mydate" fill="white"></text>
+  <text id="myweek" fill="#dddddd"></text>
+  <text id="mystats" x="50%" fill="#5682b4" class="color2"></text>
   
   <circle cx="50%" cy="50%" r="4" fill="white" />
   <circle cx="50%" cy="50%" r="2" fill="black" />
@@ -157,6 +159,7 @@
     <arc x="1" y="100%-41" width="40" height="40" fill="inherit" arc-width="4" start-angle="0" sweep-angle="0" id="today_bl" />
   </g>
 
-  <rect id="main" width="90%" height="90%" x="5%" y="5%" fill="#000000" opacity="0" pointer-events="visible" />
+  <rect id="top_half" width="30%" height="30%" x="35%" y="5%" fill="#ffffff" opacity="0" pointer-events="visible" />
+  <rect id="btm_half" width="90%" height="45%" x="5%" y="50%" fill="#ffffff" opacity="0" pointer-events="visible" />
   
 </svg>
