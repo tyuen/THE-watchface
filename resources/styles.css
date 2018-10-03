@@ -7,14 +7,16 @@ line {
   text-anchor: middle;
   text-length: 2;
   x: 73%;
+  y: 50%+8;
 }
 
 #myweek {
   font-size: 24;
   font-family: System-Regular;
   text-anchor: middle;
-  text-length: 3;
+  text-length: 20;
   x: 31%;
+  y: 50%+8;
 }
 
 #mystats {
@@ -22,13 +24,18 @@ line {
   font-family: System-Bold;
   text-anchor: middle;
   text-length: 12;
+  y: 76%+8;
 }
 #batt_bars {
   transform: translate(31%,0);
 }
 #batt0 {
   stroke-linecap: butt;
+  y1: 50%+17;
+  y2: 50%+17;
 }
 #batt {
   stroke-linecap: butt;
+  y1: 50%+17;
+  y2: 50%+17;
 }
