@@ -11,7 +11,7 @@ peerSocket.onmessage = e => {
   if(e.data && e.data.getAll) sendAll();
 };
 
-if(me.launchReasons.settingChanged) sendAll();
+if(me.launchReasons.settingsChanged) sendAll();
 
 function sendAll() {
   if(peerSocket.readyState === peerSocket.OPEN) {
