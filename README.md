@@ -7,5 +7,6 @@ Features:
 - Tap to cycle between the numerical stats
 - 4 rings to show steps, distance, active minutes and floors climbs
 - Battery indicator under the week name
+- Customize which numerical stats to show in settings
 - Direct link to app store (open with phone):
 https://gam.fitbit.com/gallery/clock/cc129d5e-ec49-40f0-8f2e-7f5f08ab3095
