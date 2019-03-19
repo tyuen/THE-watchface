@@ -142,7 +142,7 @@
     <image x="10" y="10" width="23" height="23" href="ico_cal.png" fill="inherit" />
     <image x="100%-32" y="10" width="23" height="23" href="ico_steps.png" fill="inherit" />
     <image x="100%-32" y="100%-32" width="23" height="23" href="ico_dist.png" fill="inherit" />
-    <image x="10" y="100%-32" width="23" height="23" href="ico_climb.png" fill="inherit" />
+    <image id="floors" x="10" y="100%-32" width="23" height="23" href="ico_climb.png" fill="inherit" />
   </g>
 
   <g fill="#333333" class="rings">
