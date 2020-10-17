@@ -2,40 +2,40 @@ line {
   stroke-linecap: round;
 }
 #mydate {
-  font-size: 24;
+  font-size: 26;
   font-family: System-Regular;
   text-anchor: middle;
   text-length: 2;
-  x: 73%;
-  y: 50%+8;
+  x: 82%;
+  y: 50%+10;
 }
 
 #myweek {
-  font-size: 24;
+  font-size: 26;
   font-family: System-Regular;
   text-anchor: middle;
   text-length: 20;
-  x: 31%;
-  y: 50%+8;
+  x: 23%;
+  y: 50%+10;
 }
 
 #mystats {
-  font-size: 30;
+  font-size: 32;
   font-family: System-Bold;
   text-anchor: middle;
   text-length: 12;
-  y: 76%+8;
+  y: 76%+10;
 }
 #batt_bars {
-  transform: translate(31%,0);
+  transform: translate(23%,0);
 }
 #batt0 {
   stroke-linecap: butt;
-  y1: 50%+17;
-  y2: 50%+17;
+  y1: 50%+19;
+  y2: 50%+19;
 }
 #batt {
   stroke-linecap: butt;
-  y1: 50%+17;
-  y2: 50%+17;
+  y1: 50%+19;
+  y2: 50%+19;
 }
