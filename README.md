@@ -1,4 +1,4 @@
-# THE watchface for Fitbit Ionic/Versa/Versa Lite
+# THE watchface for Fitbit Ionic/Versa/Versa Lite/Versa 3/Sense
 
 ![screenshot](TH3-screenshot.png)
 
