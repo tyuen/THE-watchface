@@ -4,6 +4,7 @@ import {me} from "companion";
 import {outbox} from "file-transfer";
 import {encode} from "cbor";
 import {locale} from "user-settings";
+import {device} from "peer";
 
 store.onchange = sendAll;
 
@@ -53,3 +54,5 @@ function getLocale() {
     return days;
   }
 }
+
+if(store.getItem("modelName") !== device.modelName) store.setItem("modelName", device.modelName);
