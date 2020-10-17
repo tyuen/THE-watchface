@@ -1,0 +1,56 @@
+#face {
+  x: 18;
+  y: 18;
+  width: 100%-36;
+  height: 100%-36;
+}
+
+#corners {
+  x: 24;
+  y: 24;
+  width: 100%-48;
+  height: 100%-48;
+}
+
+line {
+  stroke-linecap: round;
+}
+
+#mydate {
+  font-size: 26;
+  font-family: System-Regular;
+  text-anchor: middle;
+  text-length: 2;
+  x: 82%;
+  y: 50%+10;
+}
+
+#myweek {
+  font-size: 26;
+  font-family: System-Regular;
+  text-anchor: middle;
+  text-length: 20;
+  x: 23%;
+  y: 50%+10;
+}
+
+#mystats {
+  font-size: 32;
+  font-family: System-Bold;
+  text-anchor: middle;
+  text-length: 12;
+  y: 76%+10;
+}
+#batt_bars {
+  transform: translate(23%,0);
+}
+#batt0 {
+  stroke-linecap: butt;
+  y1: 50%+19;
+  y2: 50%+19;
+}
+#batt {
+  stroke-linecap: butt;
+  y1: 50%+19;
+  y2: 50%+19;
+}
