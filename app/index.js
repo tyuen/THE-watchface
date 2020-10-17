@@ -35,7 +35,7 @@ let lastUpdatedHeart = 0;
 let showRings = true;
 let unboldStats = false;
 
-let stats = ["none", "steps", "heart", "floors", "cals", "mins", "time"];
+let stats = NOCLIMB ? ["none", "steps", "heart", "cals", "mins", "time"] : ["none", "steps", "heart", "floors", "cals", "mins", "time"];
 let firstStat = 0;  //0=blank
 let curStat = 0;
 let heartSensor;
@@ -90,7 +90,7 @@ function onTick(now) {
       }
     }
 
-    if(stats.length > 0 && stats[curStat] !== "none") {
+    if(stats.length > 0 && stats[curStat] !== "none" && !display.aodActive) {
       if(stats[curStat] !== "heart") {
         updateStat();
       } else {
@@ -103,18 +103,41 @@ function onTick(now) {
   }
 }
 
-clock.granularity = "seconds";
-clock.ontick = onTick;
+function setAOD(on) {
+  if(on) {
+    clock.granularity = "minutes";
+    mySecs.style.display = "none";
+    myStats.style.display = "none";
+  } else {
+    clock.granularity = "seconds";  
+    mySecs.style.display = "inline";
+    myStats.style.display = "inline";
+  }
+}
 
+if(display.aodAvailable && me.permissions.granted("access_aod")) {
+  display.aodAllowed = true;
+  display.onchange = () => {
+    setAOD(display.aodActive);
+    if(!display.aodActive) onTick();
+  };
+  setAOD(display.aodActive);
+} else {
+  clock.granularity = "seconds";
+}
+
+clock.ontick = onTick;
 onTick();
 
 $("top_half").onclick = () => {
-  if(display.autoOff === true) {
-    display.autoOff = false;
-    $("bklight").style.display = "inline";
-  } else {
-    display.autoOff = true;
-    $("bklight").style.display = "none";
+  if(!display.aodEnabled) {
+    if(display.autoOff === true) {
+      display.autoOff = false;
+      if(!display.autoOff) $("bklight").style.display = "inline";
+    } else {
+      display.autoOff = true;
+      if(display.autoOff) $("bklight").style.display = "none";
+    }
   }
 };
 
@@ -140,7 +163,7 @@ function updateRing(node, holder, goal, today) {
   } else if(holder === "climb") {
     angle = (today.elevationGain || 0)*360/(goal.elevationGain || 20);
   } else if(holder === "active") {
-    angle = (today.activeMinutes || 0)*360/(goal.activeMinutes || 30);
+    angle = (today.activeZoneMinutes.total || 0)*360/(goal.activeZoneMinutes.total || 30);
   }
   node.sweepAngle = Math.min(360, Math.round(angle));
 }
@@ -156,7 +179,7 @@ function updateStat() {
       myStats.text = (units.distance === "metric") ? round(today.distance/1000) + " km" : round(today.distance/1609.34) + " mi";
       break;
     case "floors":
-      myStats.text = (today.elevationGain || 0) + " f";
+      myStats.text = today.elevationGain + " f";
       break;
     case "cals":
       myStats.text = today.calories + " cal";
