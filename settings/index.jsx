@@ -4,6 +4,10 @@ function isNotEmpty(list) {
   return list && (list.length === 1 ? list[0].value !== "none" : list.length > 1);
 }
 
+//stats = {selected: [1, 0, 2], values[{name:"None",value:"none"},{name:"Steps",value:"steps"},{name:"Heart Rate (bpm)",value:"heart"}]}
+
+//firstStat = {"values":[{"name":"Steps","value":"steps"}],"selected":[1]}
+
 function getClampedFirstStat(props) {
   let first = props.settingsStorage.getItem("firstStat2");
   let stats = props.settingsStorage.getItem("stats");
@@ -13,6 +17,24 @@ function getClampedFirstStat(props) {
 }
 
 registerSettingsPage(props => {
+  let statsList = [
+    {name: "None", value: "none"},
+    {name: "Steps", value: "steps"},
+    {name: "Heart Rate (bpm)", value: "heart"},
+    {name: "Resting Heart Rate (- bpm -)", value: "rest"},
+    {name: "Distance (km/mi)", value: "dist"},
+    {name: "Floors Climbed (f)", value: "floors"},
+    {name: "Calories Burned (cal)", value: "cals"},
+    {name: "Active Time (hh'mm'')", value: "mins"},
+    {name: "Weight (kg/lb)", value: "weight"},
+    {name: "Digital Time", value: "time"},
+    {name: "Battery", value: "batt"}
+  ];
+
+  if(/Versa Lite/.test(props.settings.modelName)) {
+    statsList = statsList.filter(n => n.value !== "floors");
+  }
+
   return (
     <Page>
       <Section title="Color">
@@ -42,19 +64,7 @@ registerSettingsPage(props => {
           multiple
           selectViewTitle="Show Stats"
           settingsKey="stats"
-          options={[
-            {name: "None", value: "none"},
-            {name: "Steps", value: "steps"},
-            {name: "Heart Rate (bpm)", value: "heart"},
-            {name: "Resting Heart Rate (- bpm -)", value: "rest"},
-            {name: "Distance (km/mi)", value: "dist"},
-            {name: "Floors Climbed (f)", value: "floors"},
-            {name: "Calories Burned (cal)", value: "cals"},
-            {name: "Active Time (hh'mm'')", value: "mins"},
-            {name: "Weight (kg/lb)", value: "weight"},
-            {name: "Digital Time", value: "time"},
-            {name: "Battery", value: "batt"}
-          ]}
+          options={statsList}
         />        
 
         {(isNotEmpty(props.settings.stats) ?
