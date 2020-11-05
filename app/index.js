@@ -99,6 +99,8 @@ function onTick(now) {
           updateHeart();
         }
       }
+    } else {
+      myStats.text = "";
     }
   }
 }
@@ -185,7 +187,7 @@ function updateStat() {
       myStats.text = today.calories + " cal";
       break;
     case "mins":
-      let t = today.activeMinutes;
+      let t = today.activeZoneMinutes.total;
       myStats.text = Math.floor(t/60) + "' " + pad(t % 60) + '"';
       break;
     case "time":
@@ -314,5 +316,5 @@ if(parseFile("settings2.txt")) {
 }
 
 if(NOCLIMB) {
-  $("floors").href = "ico_active.png";
+  $("floors").href = "ico_azonem.png";
 }
