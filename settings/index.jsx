@@ -25,7 +25,7 @@ registerSettingsPage(props => {
     {name: "Distance (km/mi)", value: "dist"},
     {name: "Floors Climbed (f)", value: "floors"},
     {name: "Calories Burned (cal)", value: "cals"},
-    {name: "Active Time (hh'mm'')", value: "mins"},
+    {name: "Active Zone Minutes (hh'mm'')", value: "mins"},
     {name: "Weight (kg/lb)", value: "weight"},
     {name: "Digital Time", value: "time"},
     {name: "Battery", value: "batt"}
